@@ -41,6 +41,8 @@
     elseif ($passwordValue === "" || ($passwordValue !== "terps")) {
         echo "<h3>Invalid login information provided.</h3>";
     }else {
+        session_start();
+        $_SESSION["ctr"]  = 0;
         header('Location: section.php');
     }
 } ?>

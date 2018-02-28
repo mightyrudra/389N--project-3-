@@ -50,7 +50,7 @@
                     }
                     fclose($fp);?>
                     <style type="text/css">#sectionForm{display:none;}</style>
-                    <div class="container-fluid">
+                    <div class="container-fluid" id="gradeForm">
                         <form action='<?php $_SERVER['PHP_SELF'];?>' method="post">
                             <h1>Grades Submission Form</h1>
                             <h2>Course: <?php echo "$courseNameValue"?>, Section: <?php echo "$sectionValue"?></h2>
@@ -73,6 +73,7 @@
                                             <td><input type="radio" name="<?php echo $p->getName()?>" value="C"><label for="C"> C</label></td>
                                             <td><input type="radio" name="<?php echo $p->getName()?>" value="D"><label for="D"> D</label></td>
                                             <td><input type="radio" name="<?php echo $p->getName()?>" value="F"><label for="F"> F</label></td>
+                                            <td style="display: none;"><input checked="checked" type="radio" name="<?php echo $p->getName()?>" value="NG"><label for="NG"> NG</label></td>
                                         </tr>
                                     <?php }?>
                                     </tbody>
@@ -84,6 +85,17 @@
                         </form>
                     </div>
             <?php }
-            }?>
+            }elseif(isset($_POST["submit3"])){
+
+                session_start();
+
+                $keys = array_keys($_POST);
+                foreach ($keys as $key)
+                    $_SESSION[$key] = $_POST[$key];
+                header('Location: displayGrades.php');
+                ?>
+                <style type="text/css">#gradeForm{display:none;}</style>
+
+            <?php }?>
     </body>
 </html>
